@@ -25,8 +25,8 @@ func GetLogger() *Logger {
 	return &Logger{e}
 }
 
-func (l *Logger) GetLoggerWithField(k string, v interface{}) Logger {
-	return Logger{l.WithField(k, v)}
+func (l *Logger) GetLoggerWithField(k string, v interface{}) *Logger {
+	return &Logger{l.WithField(k, v)}
 }
 
 func (hook *writeHook) Fire(entry *logrus.Entry) error {
@@ -59,7 +59,7 @@ func init() {
 		FullTimestamp: true,
 	}
 
-	err := os.Mkdir("logs", 0664)
+	err := os.MkdirAll("logs", 0664)
 	if err != nil {
 		panic(err)
 	}
