@@ -5,14 +5,19 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/stasdashkevitch/rest-api/cmd/internal/handlers"
+	"github.com/stasdashkevitch/rest-api/cmd/pkg/logging"
 )
 
 var _ handlers.Handler = &handler{}
 
-type handler struct{}
+type handler struct {
+	logger logging.Logger
+}
 
-func NewHandler() handlers.Handler {
-	return &handler{}
+func NewHandler(logger logging.Logger) handlers.Handler {
+	return &handler{
+		logger: logger,
+	}
 }
 
 const (
